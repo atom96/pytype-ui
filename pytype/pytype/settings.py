@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'main_view'
 ]
 
 MIDDLEWARE = [
@@ -77,8 +78,15 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    },
+    'types': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': '/home/arek/Pulpit/mgr/algorithms/monkeytype.sqlite3'
     }
+
 }
+
+DATABASE_ROUTERS=[ 'pytype.dbrouter.DBRouter' ]
 
 
 # Password validation
