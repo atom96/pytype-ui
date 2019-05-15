@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+
+<h2> Showing module {{ module_prefix }}</h2>
+<table>
+
+    <thead>
+    <tr>
+        <th> Module name</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {% for x in modules %}
+    <tr>
+        <td>
+            <a href="/module/{{x}}"> {{x}} </a>
+        </td>
+    </tr>
+
+    {% endfor %}
+
+    </tbody>
+</table>
+
+{% endblock %}

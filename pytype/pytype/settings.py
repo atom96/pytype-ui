@@ -82,6 +82,10 @@ DATABASES = {
     'types': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': '/home/arek/Pulpit/mgr/algorithms/monkeytype.sqlite3'
+    },
+    'pysonar': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': '/home/arek/Pulpit/mgr/algorithms/pysonar.sqlite3'
     }
 
 }

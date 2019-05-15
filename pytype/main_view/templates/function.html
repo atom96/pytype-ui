@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<style>
+    table {
+        border: solid 1px black;
+    }
+    td, th {
+        border-bottom: solid 1px black;
+        border-left: solid 1px black;
+
+
+    }
+</style>
+
+<h2> Function {{function_name}} from {{module_name}} details </h2>
+
+
+<h3> Parameters </h3>
+<table>
+
+    <thead>
+    <tr>
+        <th> Param name</th>
+        <th> MonkeyType types </th>
+        <th> PySonar2 types </th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    {% for p, types in param_types %}
+
+
+    <tr>
+        <td>
+            {{p}}
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+    </tr>
+
+
+    {% for mt, ps in types %}
+    <tr>
+        <td>
+        </td>
+        <td>
+            {{mt}}
+        </td>
+        <td> {{ps}}</td>
+    </tr>
+    {% endfor %}
+
+    {% endfor %}
+
+    </tbody>
+</table>
+
+<h3> Return types </h3>
+
+
+<table>
+
+    <thead>
+    <tr>
+        <th> MonkeyType return type </th>
+        <th> PySonar2 return type </th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {% for mt, ps in return_types %}
+    <tr>
+        <td>
+            {{mt}}
+        </td>
+        <td>
+            {{ps}}
+        </td>
+    </tr>
+
+    {% endfor %}
+
+    </tbody>
+</table>
+
+
+{% endblock %}

@@ -1,13 +1,13 @@
-from main_view.models import MonkeytypeCallTraces
+from main_view.models import MonkeytypeCallTraces, PysonarCalls
 
 
 class DBRouter:
     def db_for_read(self, model, **hints):
         print(model)
         if model == MonkeytypeCallTraces:
-            print("ok")
             return 'types'
-        print("nope")
+        if model == PysonarCalls:
+            return 'pysonar'
         return 'default'
     #
     # def db_for_write(self, model, **hints):

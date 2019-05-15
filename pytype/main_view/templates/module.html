@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+
+<h2> Functions in module {{ module_name }}</h2>
+
+<table>
+
+    <thead>
+    <tr>
+        <th> Function name</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {% for f in functions %}
+    <tr>
+        <td>
+            <a href="/function/{{module_name}}/{{f}}"> {{f}} </a>
+        </td>
+    </tr>
+
+    {% endfor %}
+
+    </tbody>
+</table>
+
+{% endblock %}
