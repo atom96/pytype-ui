@@ -1,13 +1,15 @@
+from django.conf import settings
+
 from main_view.models import MonkeytypeCallTraces, PysonarCalls
 
 
 class DBRouter:
     def db_for_read(self, model, **hints):
-        print(model)
+        print(model, hints, settings)
         if model == MonkeytypeCallTraces:
-            return 'types'
+            return settings.repo_name + '_types'
         if model == PysonarCalls:
-            return 'pysonar'
+            return settings.repo_name + '_pysonar'
         return 'default'
     #
     # def db_for_write(self, model, **hints):

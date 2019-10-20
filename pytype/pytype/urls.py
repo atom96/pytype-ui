@@ -15,11 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from main_view.views import modules_view, function_view
+from main_view.views import modules_view, module_view, function_view, similarity_view, modules_similarity_view, all_packages_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', modules_view),
-    path('module/<str:module_prefix>', modules_view),
-    path('function/<str:module_name>/<str:function_name>', function_view)
+    path('', all_packages_view),
+    path('module/<str:repo_name>', modules_view),
+    path('module/<str:repo_name>/<str:module_prefix>', modules_view),
+    path('flat_module/<str:repo_name>/<str:module_name>/<str:add_init>', module_view),
+    path('similarity/<str:repo_name>/<str:module_name>/<str:add_init>', similarity_view),
+    path('module_similarity/<str:repo_name>', modules_similarity_view),
+    path('module_similarity/<str:repo_name>/<str:module_prefix>', modules_similarity_view),
+    path('function/<str:repo_name>/<str:module_name>/<str:function_name>/<str:add_init>', function_view)
 ]

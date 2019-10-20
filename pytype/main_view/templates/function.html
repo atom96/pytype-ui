@@ -16,6 +16,35 @@
 
 <h2> Function {{function_name}} from {{module_name}} details </h2>
 
+<h3> Simmilarity: </h3>
+<table>
+    <thead>
+    <tr>
+        <th> Parameter </th>
+        <th> Similarity </th>
+        <th> MonkeyType share </th>
+        <th> PySonar2 share </th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for param, sim in param_sim.items %}
+    <tr>
+        <td> {{ param }} </td>
+        <td> {{ sim.0 }} </td>
+        <td> {{ sim.1 }} </td>
+        <td> {{ sim.2 }} </td>
+
+    </tr>
+    {% endfor %}
+    <tr>
+        <td> Return value </td>
+        <td> {{ return_sim.0 }} </td>
+        <td> {{ return_sim.1 }} </td>
+        <td> {{ return_sim.2 }} </td>
+    </tr>
+    </tbody>
+
+</table>
 
 <h3> Parameters </h3>
 <table>

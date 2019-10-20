@@ -79,16 +79,28 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     },
-    'types': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '/home/arek/Pulpit/mgr/algorithms/monkeytype.sqlite3'
-    },
-    'pysonar': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '/home/arek/Pulpit/mgr/algorithms/pysonar.sqlite3'
-    }
+    # 'types': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': '/home/arek/Pulpit/mgr/algorithms/monkeytype.sqlite3'
+    # },
+    # 'pysonar': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': '/home/arek/Pulpit/mgr/algorithms/pysonar.sqlite3'
+    # }
 
 }
+
+for x in os.listdir('/home/arek/Pulpit/mgr'):
+    if not(x.startswith('.')):
+        DATABASES[x + '_pysonar'] = {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': '/home/arek/Pulpit/mgr/{}/pysonar.sqlite3'.format(x)
+        }
+        DATABASES[x + '_types'] = {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': '/home/arek/Pulpit/mgr/{}/monkeytype.sqlite3'.format(x)
+        }
+
 
 DATABASE_ROUTERS=[ 'pytype.dbrouter.DBRouter' ]
 

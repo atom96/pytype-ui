@@ -4,6 +4,8 @@
 
 
 <h2> Showing module {{ module_prefix }}</h2>
+<h3> <a href="/module_similarity/{{repo_name}}/{{ module_prefix }}"> Average modules similarity </a></h3>
+
 <table>
 
     <thead>
@@ -16,11 +18,19 @@
     {% for x in modules %}
     <tr>
         <td>
-            <a href="/module/{{x}}"> {{x}} </a>
+            <a href="/module/{{repo_name}}/{{x}}"> {{x}} </a>
         </td>
     </tr>
 
     {% endfor %}
+
+    {% if add_flat_module %}
+    <tr>
+        <td>
+            <a href="/flat_module/{{repo_name}}/{{module_prefix}}/y"> {{ module_prefix }}.__init__ </a>
+        </td>
+    </tr>
+    {% endif %}
 
     </tbody>
 </table>

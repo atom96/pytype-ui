@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<table>
+
+    <thead>
+    <tr>
+        <th> Python repository name</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {% for repo in repos %}
+    <tr>
+        <td>
+            <a href="/module/{{repo}}"> {{ repo }} </a>
+        </td>
+    </tr>
+
+    {% endfor %}
+
+    </tbody>
+</table>
+
+{% endblock %}
