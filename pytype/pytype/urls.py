@@ -22,9 +22,9 @@ urlpatterns = [
     path('', all_packages_view),
     path('module/<str:repo_name>', modules_view),
     path('module/<str:repo_name>/<str:module_prefix>', modules_view),
-    path('flat_module/<str:repo_name>/<str:module_name>/<str:add_init>', module_view),
-    path('similarity/<str:repo_name>/<str:module_name>/<str:add_init>', similarity_view),
+    path('flat_module/<str:repo_name>/<str:module_name>', module_view),
+    path('similarity/<str:repo_name>/<str:module_name>', similarity_view),
     path('module_similarity/<str:repo_name>', modules_similarity_view),
     path('module_similarity/<str:repo_name>/<str:module_prefix>', modules_similarity_view),
-    path('function/<str:repo_name>/<str:module_name>/<str:function_name>/<str:add_init>', function_view)
+    path('function/<str:repo_name>/<str:module_name>/<str:function_name>', function_view)
 ]

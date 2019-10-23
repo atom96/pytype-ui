@@ -4,8 +4,11 @@
 
 
 <h2> Showing module {{ module_prefix }}</h2>
-<h3> <a href="/module_similarity/{{repo_name}}/{{ module_prefix }}"> Average modules similarity </a></h3>
-
+{% if module_prefix %}
+<h3> <a href="/module_similarity/{{repo_name}}/{{module_prefix }}"> Average modules similarity </a></h3>
+{% else %}
+<h3> <a href="/module_similarity/{{repo_name}}"> Average modules similarity </a></h3>
+{% endif %}
 <table>
 
     <thead>
@@ -27,7 +30,7 @@
     {% if add_flat_module %}
     <tr>
         <td>
-            <a href="/flat_module/{{repo_name}}/{{module_prefix}}/y"> {{ module_prefix }}.__init__ </a>
+            <a href="/flat_module/{{repo_name}}/{{module_prefix}}"> {{ module_prefix }}.__init__ </a>
         </td>
     </tr>
     {% endif %}

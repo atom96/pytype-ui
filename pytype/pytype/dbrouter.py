@@ -5,7 +5,6 @@ from main_view.models import MonkeytypeCallTraces, PysonarCalls
 
 class DBRouter:
     def db_for_read(self, model, **hints):
-        print(model, hints, settings)
         if model == MonkeytypeCallTraces:
             return settings.repo_name + '_types'
         if model == PysonarCalls:
