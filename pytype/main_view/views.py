@@ -152,6 +152,7 @@ def modules_similarity_view(request, repo_name, module_prefix=''):
     monkey_share = mean(s[1] for s in stats)
 
     sonar_share = mean(s[2] for s in stats)
+    module_name = module_prefix
 
     return render(request, 'similarity.html', locals())
 
@@ -162,5 +163,5 @@ def function_view(request, repo_name, module_name, function_name):
 
 
 def all_packages_view(request):
-    repos = sorted([x for x in os.listdir('/home/arek/Pulpit/mgr') if not x.startswith('.')], key=lambda x: x.lower())
+    repos = sorted([x for x in os.listdir(settings.REPOS_DIR) if not x.startswith('.')], key=lambda x: x.lower())
     return render(request, 'main.html', locals())

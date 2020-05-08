@@ -1,26 +1,13 @@
 {% extends 'base.html' %}
 
 {% block body %}
+<h2 class="header"> Python projects: </h2>
 
-<table>
-
-    <thead>
-    <tr>
-        <th> Python repository name</th>
-    </tr>
-    </thead>
-
-    <tbody>
+    <ul>
     {% for repo in repos %}
-    <tr>
-        <td>
-            <a href="/module/{{repo}}"> {{ repo }} </a>
-        </td>
-    </tr>
-
+        <li> <a href="/module/{{repo}}"> {{ repo }} </a> </li>
     {% endfor %}
+    </ul>
 
-    </tbody>
-</table>
 
 {% endblock %}

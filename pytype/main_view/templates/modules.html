@@ -3,39 +3,32 @@
 {% block body %}
 
 
-<h2> Showing module {{ module_prefix }}</h2>
+
 {% if module_prefix %}
-<h3> <a href="/module_similarity/{{repo_name}}/{{module_prefix }}"> Average modules similarity </a></h3>
+<h2 class="header"> Module: {{ module_prefix }}</h2>
 {% else %}
-<h3> <a href="/module_similarity/{{repo_name}}"> Average modules similarity </a></h3>
+<h2 class="header"> Project: {{ repo_name }}</h2>
 {% endif %}
-<table>
 
-    <thead>
-    <tr>
-        <th> Module name</th>
-    </tr>
-    </thead>
 
-    <tbody>
-    {% for x in modules %}
-    <tr>
-        <td>
-            <a href="/module/{{repo_name}}/{{x}}"> {{x}} </a>
-        </td>
-    </tr>
+{% if module_prefix %}
+<h3> <a href="/module_similarity/{{repo_name}}/{{module_prefix }}"> Click here</a> to calculate modules average similarity </a></h3>
+{% else %}
+<h3> <a href="/module_similarity/{{repo_name}}"> Click here</a> to calculate project average similarity </a></h3>
+{% endif %}
 
-    {% endfor %}
+<h2> Modules: </h2>
+<ul>
 
-    {% if add_flat_module %}
-    <tr>
-        <td>
-            <a href="/flat_module/{{repo_name}}/{{module_prefix}}"> {{ module_prefix }}.__init__ </a>
-        </td>
-    </tr>
-    {% endif %}
+{% for x in modules %}
+    <li> <a href="/module/{{repo_name}}/{{x}}"> {{x}} </a> </li>
+{% endfor %}
 
-    </tbody>
-</table>
+{% if add_flat_module %}
+    <li> <a href="/flat_module/{{repo_name}}/{{module_prefix}}"> {{ module_prefix }}.__init__ </a> </li>
+{% endif %}
+</ul>
+
+
 
 {% endblock %}

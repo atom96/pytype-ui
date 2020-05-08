@@ -1,6 +1,6 @@
 import json
-from collections import defaultdict
-from itertools import chain
+from collections import defaultdict, OrderedDict
+from itertools import chain, zip_longest
 from typing import List
 
 from main_view.data_cache import DataCache
@@ -117,28 +117,18 @@ def _function_view(module_name, function_name, use_cache=False):
                 return_types[1].add(flat_type)
 
     return_sim = [_jaccard_sim(*return_types), _better_sim(*return_types), _better_sim(*tuple(reversed(return_types)))]
-    param_sim = {}
-    for param, types in param_types.items():
+    param_sim = OrderedDict()
+    for param, types in sorted(param_types.items()):
         param_sim[param] = [_jaccard_sim(*types), _better_sim(*types), _better_sim(*tuple(reversed(types)))]
 
-    new_param_types = {}
-    for param, types in param_types.items():
-        if len(types[0]) > len(types[1]):
-            types[1] = chain(sorted(types[1]), empty_str_generator())
-        else:
-            types[0] = chain(sorted(types[0]), empty_str_generator())
-
+    new_param_types = OrderedDict()
+    for param, types in sorted(param_types.items()):
         new_param_types[param] = [
-            (x, y) for x, y in zip(*types)
+            (x, y) for x, y in zip_longest(*[sorted(l) for l in types], fillvalue='')
         ]
 
-    if len(return_types[0]) > len(return_types[1]):
-        return_types[1] = chain(sorted(return_types[1]), empty_str_generator())
-    else:
-        return_types[0] = chain(sorted(return_types[0]), empty_str_generator())
-
     return_types = [
-        (x, y) for x, y in zip(*return_types)
+        (x, y) for x, y in zip_longest(*[sorted(l) for l in return_types], fillvalue='')
     ]
 
     param_types = new_param_types.items()

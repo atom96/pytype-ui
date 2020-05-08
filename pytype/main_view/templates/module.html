@@ -3,28 +3,20 @@
 {% block body %}
 
 
-<h2> Functions in module {{ module_name }}</h2>
-<h3> <a href="/similarity/{{repo_name}}/{{ module_name }}"> Average module similarity </a></h3>
+<h2 class="header"> Functions in module {{ module_name }}</h2>
 
-<table>
+<h3> <a href="/similarity/{{repo_name}}/{{ module_name }}"> Click here</a> to calculate module average similarity </h3>
 
-    <thead>
-    <tr>
-        <th> Function name</th>
-    </tr>
-    </thead>
+<h3> Functions: </h3>
 
-    <tbody>
+    <ul>
     {% for f in functions %}
-    <tr>
-        <td>
-            <a href="/function/{{repo_name}}/{{module_name}}/{{f}}"> {{f}} </a>
-        </td>
-    </tr>
 
+        <li>
+            <a href="/function/{{repo_name}}/{{module_name}}/{{f}}"> {{f}} </a>
+        </li>
     {% endfor %}
 
-    </tbody>
-</table>
+    </ul>
 
 {% endblock %}
