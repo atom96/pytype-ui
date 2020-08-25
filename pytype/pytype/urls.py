@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from main_view.views import modules_view, module_view, function_view, similarity_view, modules_similarity_view, all_packages_view
+from main_view.views import modules_view, module_view, function_view, similarity_view, modules_similarity_view, \
+    all_packages_view, num_of_functions_view, set_of_functions_view, new_similarity_repo
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,5 +27,8 @@ urlpatterns = [
     path('similarity/<str:repo_name>/<str:module_name>', similarity_view),
     path('module_similarity/<str:repo_name>', modules_similarity_view),
     path('module_similarity/<str:repo_name>/<str:module_prefix>', modules_similarity_view),
-    path('function/<str:repo_name>/<str:module_name>/<str:function_name>', function_view)
+    path('function/<str:repo_name>/<str:module_name>/<str:function_name>', function_view),
+    path('num', num_of_functions_view),
+    path('set/<str:repo_name>', set_of_functions_view),
+    path('new_sim/<str:repo_name>', new_similarity_repo)
 ]

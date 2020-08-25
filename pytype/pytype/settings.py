@@ -90,19 +90,21 @@ DATABASES = {
 
 }
 
-for x in os.listdir('/home/arek/Pulpit/mgr'):
+REPOS_DIR = '/home/arek/Pulpit/mgr/'
+
+for x in os.listdir(REPOS_DIR):
     if not(x.startswith('.')):
         DATABASES[x + '_pysonar'] = {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': '/home/arek/Pulpit/mgr/{}/pysonar.sqlite3'.format(x)
+            'NAME': '{}{}/pysonar.sqlite3'.format(REPOS_DIR, x)
         }
         DATABASES[x + '_types'] = {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': '/home/arek/Pulpit/mgr/{}/monkeytype.sqlite3'.format(x)
+            'NAME': '{}{}/monkeytype.sqlite3'.format(REPOS_DIR, x)
         }
 
 
-DATABASE_ROUTERS=[ 'pytype.dbrouter.DBRouter' ]
+DATABASE_ROUTERS=['pytype.dbrouter.DBRouter']
 
 
 # Password validation

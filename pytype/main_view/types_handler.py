@@ -33,7 +33,6 @@ def _resolve_union(union_str: str) -> List[str]:
         return [union_str]
     else:
         types = _smart_splitter(union_str[len("Union["): -1])
-        print(union_str, types)
         return [
             i for t in types for i in _resolve_union(t)
         ]
@@ -53,26 +52,36 @@ def _better_sim(set1, set2):
         return 0.0
 
 
-def get_pysonar_calls(module_name, function_name, use_cache=False):
-    def _get_data(_module_name, _function_name):
-        qualname = _module_name + '.' + _function_name
+def get_pysonar_calls(module_name, function_name, ps_name, use_cache=False):
+    def _to_qualname(_module_name, _function_name):
+        return _module_name + '.' + _function_name
 
+    def _get_data(qualname):
         if use_cache:
             return DataCache.instance().pysonar_cache[qualname]
         else:
             return PysonarCalls.objects.filter(qualname=qualname)
 
+    if ps_name is not None:
+        return _get_data(ps_name)
 
-    data = _get_data(module_name, function_name)
+    data = _get_data(_to_qualname(module_name, function_name))
     if len(data) == 0:
-        new_module = module_name + '.__init__'
-        data = _get_data(new_module, function_name)
+        splitted = module_name.split('.')
+        for index in range(len(splitted) + 1):
+            new_module = '.'.join(splitted[:index] + ['__init__'] + splitted[index:])
+            print(_to_qualname(new_module, function_name))
+            data = _get_data(_to_qualname(new_module, function_name))
+            if len(data) > 0:
+                break
 
     if len(data) == 0:
         if module_name.startswith("test"):
             new_module = "tests." + module_name
-            data = _get_data(new_module, function_name)
-
+            data = _get_data(_to_qualname(new_module, function_name))
+        else:
+            new_module = 'src.' + module_name
+            data = _get_data(_to_qualname(new_module, function_name))
     return data
 
 
@@ -83,9 +92,9 @@ def get_monkey_calls(module_name, function_name, use_cache=False):
         return MonkeytypeCallTraces.objects.filter(module=module_name).filter(qualname=function_name)
 
 
-def _function_view(module_name, function_name, use_cache=False):
+def _function_view(module_name, function_name, ps_name=None, use_cache=False):
     calls = get_monkey_calls(module_name, function_name, use_cache)
-    pysonar_calls = get_pysonar_calls(module_name, function_name, use_cache)
+    pysonar_calls = get_pysonar_calls(module_name, function_name, ps_name, use_cache)
 
     param_types = defaultdict(lambda: [set(), set()])
     return_types = [set(), set()]
